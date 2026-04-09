@@ -1,32 +1,45 @@
-# Задание для Front-end стажёра
+﻿# VK Cats App on Next.js
 
-Привет! Если ты хочешь стать частью команды Учи.ру в рамках стажёрской программы, 
-то тебе необходимо выполнить небольшое тестовое задание. Это нужно, что бы твои 
-потенциальные наставники смогли оценить твои навыки и сравнив их с остальными
-кандидатами выбрать лучших из лучших. 
+This project shows cat images from an external API and lets users save favorite cats on the client.
 
-Помни, что работающий продукт важнее количества технологий и красивого кода. 
+## Features
 
-Удачи!
+- Next.js + React + TypeScript
+- tabs for `Все котики` and `Любимые котики`
+- favorites stored in `localStorage`
+- internal endpoint `GET /api/cats`
+- all external API calls go through the internal Next.js API route
+- responsive grid
+- infinite scroll on the all-cats tab
 
-## Что нужно сделать ?
+## Run locally
 
-- форкнуть этот репозитарий в свой github аккаунт
-- реализовать проект по описанию ниже
-- опубликовать его на github pages
-- прислать нам свой гитхаб аккаунт и ссылку на опубликованный сайт
-- ждать обратной связи :)
+1. Install dependencies:
 
-## Проект "Кошачий пинтерест"
+```bash
+npm install
+```
 
-Необходимо реализовать интерфейс для просмотра котиков используя API https://thecatapi.com
+2. Create `.env.local` from `.env.example`:
 
-Дизайн лежит тут - https://bit.ly/3utxaL2
+```bash
+CAT_API_KEY=your_cat_api_key_here
+```
 
-- по умолчанию должна открываться вкладка "все котики"
-- у котика должна быть возможность добавить в "любимые" и убрать из "любимых"
-- данные о "любимых" котиках должны хранится на клиенте
-- на вкладке "любимые котики" должны отображаться добавленные в "любимые" котики
-- реализация адаптивности будет плюсом, но не обязательна
-- бесконечная прокрутка будет плюсом, но не обязательна
-- можно использовать любой фреймворк включая vanilla.js
+3. Start the app:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## API
+
+Internal endpoint:
+
+```text
+GET /api/cats?page=0&limit=10
+```
+
+It calls `https://api.thecatapi.com/v1/images/search` and sends the API key in the `x-api-key` header.

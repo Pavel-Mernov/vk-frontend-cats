@@ -1,0 +1,190 @@
+﻿.page {
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.65), transparent 28%),
+    linear-gradient(180deg, #eef2f7 0%, var(--page-bg) 100%);
+}
+
+.shell {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: var(--panel-bg);
+  box-shadow: var(--shadow);
+}
+
+.header {
+  background: linear-gradient(90deg, var(--primary) 0%, #2d9ef6 100%);
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+}
+
+.tab {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 16px 22px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab:hover,
+.tabActive {
+  background: rgba(0, 0, 0, 0.12);
+  color: #ffffff;
+}
+
+.content {
+  min-height: calc(100vh - 120px);
+  padding: 22px 28px 28px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 225px);
+  column-gap: 36px;
+  row-gap: 44px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.gridAlignLeft {
+  justify-content: start;
+}
+
+.card {
+  position: relative;
+  width: 225px;
+  height: 225px;
+  overflow: hidden;
+  background: #f6f8fb;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform-origin: top left;
+}
+
+.card:hover {
+  z-index: 2;
+  transform: scaleX(1.1422) scaleY(1.1378);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.image {
+  display: block;
+  width: 225px;
+  height: 225px;
+  object-fit: cover;
+  background: #e8edf5;
+}
+
+.favoriteButton {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #ff5c39;
+  box-shadow: 0 4px 10px rgba(17, 24, 39, 0.15);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.card:hover .favoriteButton,
+.favoriteButtonActive {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.favoriteButtonActive {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.card:hover .favoriteButtonActive {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.favoriteButton:hover {
+  background: transparent;
+}
+
+.favoriteButtonActive {
+  background: transparent;
+}
+
+.heartIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.favoriteButton[data-favorite="false"]:hover .heartIcon {
+  fill: currentColor;
+}
+
+.message,
+.loading {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.message {
+  padding: 48px 0;
+}
+
+.loading {
+  padding: 20px 0 0;
+}
+
+.loaderTrigger {
+  width: 100%;
+  height: 2px;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 0;
+  }
+
+  .content {
+    padding: 16px;
+    min-height: calc(100vh - 76px);
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    justify-content: stretch;
+    gap: 20px;
+  }
+
+  .card,
+  .image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .tab {
+    flex: 1 1 50%;
+    padding: 16px 12px;
+  }
+}

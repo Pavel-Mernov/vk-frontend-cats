@@ -1,4 +1,5 @@
-.idea
+﻿.idea
 node_modules/
+.next/
+.env*
 *.tsbuildinfo
-
