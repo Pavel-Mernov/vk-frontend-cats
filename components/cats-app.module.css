@@ -65,7 +65,7 @@
   background: #f6f8fb;
   box-shadow: var(--card-shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  transform-origin: top left;
+  transform-origin: top center;
 }
 
 .card:hover {
