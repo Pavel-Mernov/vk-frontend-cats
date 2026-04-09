@@ -5,6 +5,8 @@ import { PAGE_SIZE } from "./constants";
 import { readFavorites, saveFavorites } from "./favorites-storage";
 import type { Cat, TabId } from "./types";
 
+const CAT_API_URL = "https://api.thecatapi.com/v1/images/search";
+
 export function useCatsFeed() {
   const [activeTab, setActiveTab] = useState<TabId>("all");
   const [cats, setCats] = useState<Cat[]>([]);
@@ -20,7 +22,23 @@ export function useCatsFeed() {
     setError(null);
 
     try {
-      const response = await fetch(`/api/cats?page=${nextPage}&limit=${PAGE_SIZE}`, {
+      const apiKey = process.env.NEXT_PUBLIC_CAT_API_KEY;
+
+      if (!apiKey) {
+        throw new Error("Не найден NEXT_PUBLIC_CAT_API_KEY. Добавьте ключ в env перед запуском.");
+      }
+
+      const requestUrl = new URL(CAT_API_URL);
+      requestUrl.searchParams.set("limit", String(PAGE_SIZE));
+      requestUrl.searchParams.set("page", String(nextPage));
+      requestUrl.searchParams.set("order", "DESC");
+      requestUrl.searchParams.set("size", "small");
+      requestUrl.searchParams.set("has_breeds", "0");
+
+      const response = await fetch(requestUrl.toString(), {
+        headers: {
+          "x-api-key": apiKey
+        },
         cache: "no-store"
       });
 

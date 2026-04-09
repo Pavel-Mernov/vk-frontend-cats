@@ -7,8 +7,7 @@ This project shows cat images from an external API and lets users save favorite 
 - Next.js + React + TypeScript
 - tabs for `Все котики` and `Любимые котики`
 - favorites stored in `localStorage`
-- internal endpoint `GET /api/cats`
-- all external API calls go through the internal Next.js API route
+- static export for GitHub Pages
 - responsive grid
 - infinite scroll on the all-cats tab
 
@@ -23,7 +22,7 @@ npm install
 2. Create `.env.local` from `.env.example`:
 
 ```bash
-CAT_API_KEY=your_cat_api_key_here
+NEXT_PUBLIC_CAT_API_KEY=your_cat_api_key_here
 ```
 
 3. Start the app:
@@ -34,12 +33,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## API
+## GitHub Pages deployment
 
-Internal endpoint:
+The project is configured for static export and deployment through GitHub Actions.
 
-```text
-GET /api/cats?page=0&limit=10
-```
+1. Open repository `Settings -> Pages`.
+2. Set source to `GitHub Actions`.
+3. Add `NEXT_PUBLIC_CAT_API_KEY` in `Settings -> Secrets and variables -> Actions`.
+4. Push to `master` and wait for the workflow to publish the `out` folder.
 
-It calls `https://api.thecatapi.com/v1/images/search` and sends the API key in the `x-api-key` header.
+## Notes
+
+- GitHub Pages does not run a Next.js server, so `app/api/*` routes are not available there.
+- In static hosting mode the Cat API key is public, because requests are made from the browser.
